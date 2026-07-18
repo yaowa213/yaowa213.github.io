@@ -1,0 +1,1035 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ofentse Thibedi — Data & AI Systems Builder</title>
+<meta name="description" content="Ofentse Thibedi is a Johannesburg-based data analytics and AI systems builder — Product & Operations Analyst at Sirius Sales, co-founder of Auralith, and builder of eight working prototypes spanning fintech, health, staffing, and trading systems.">
+<meta property="og:title" content="Ofentse Thibedi — Data & AI Systems Builder">
+<meta property="og:description" content="Turning messy operations into working products. Data analytics, data engineering, and applied AI systems — built end to end.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0a0f0d;
+    --surface: #121915;
+    --surface-2: #1a231d;
+    --surface-3: #212c24;
+    --line: rgba(237,239,238,0.09);
+    --line-strong: rgba(237,239,238,0.16);
+    --text: #edefee;
+    --text-muted: #96a39c;
+    --text-faint: #5f6b64;
+    --gold: #c9a227;
+    --gold-bright: #e4c245;
+    --teal: #4fbda8;
+    --teal-bright: #6bd6c1;
+    --shadow: 0 20px 60px -20px rgba(0,0,0,0.6);
+    --radius: 4px;
+    --font-display: 'Space Grotesk', sans-serif;
+    --font-body: 'IBM Plex Sans', sans-serif;
+    --font-mono: 'IBM Plex Mono', monospace;
+  }
+
+  html[data-theme="light"] {
+    --ink: #f7f5ef;
+    --surface: #ffffff;
+    --surface-2: #f0ede4;
+    --surface-3: #e6e2d6;
+    --line: rgba(10,15,13,0.09);
+    --line-strong: rgba(10,15,13,0.18);
+    --text: #14201a;
+    --text-muted: #4d5951;
+    --text-faint: #8a938c;
+    --gold: #96751a;
+    --gold-bright: #7a5e12;
+    --teal: #14847a;
+    --teal-bright: #0e6961;
+    --shadow: 0 20px 60px -20px rgba(20,32,26,0.15);
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
+  }
+
+  body {
+    margin: 0;
+    background: var(--ink);
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    transition: background 0.3s ease, color 0.3s ease;
+  }
+
+  ::selection { background: var(--gold); color: var(--ink); }
+
+  a { color: inherit; }
+
+  .wrap {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+
+  @media (max-width: 640px) {
+    .wrap { padding: 0 20px; }
+  }
+
+  /* ---------- Nav ---------- */
+  header.nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: color-mix(in srgb, var(--ink) 82%, transparent);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 68px;
+  }
+  .logo {
+    font-family: var(--font-mono);
+    font-weight: 600;
+    font-size: 15px;
+    letter-spacing: 0.02em;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+  }
+  .logo .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--gold); box-shadow: 0 0 10px var(--gold); flex-shrink: 0; }
+  .nav-links {
+    display: flex;
+    gap: 36px;
+    list-style: none;
+    margin: 0; padding: 0;
+    font-size: 14px;
+  }
+  .nav-links a {
+    text-decoration: none;
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    transition: color 0.2s ease;
+    position: relative;
+  }
+  .nav-links a:hover { color: var(--text); }
+  .nav-links a .idx { color: var(--gold); margin-right: 6px; }
+
+  .nav-right { display: flex; align-items: center; gap: 18px; }
+
+  .theme-toggle {
+    background: none;
+    border: 1px solid var(--line-strong);
+    border-radius: 100px;
+    width: 40px; height: 24px;
+    position: relative;
+    cursor: pointer;
+    padding: 0;
+    flex-shrink: 0;
+  }
+  .theme-toggle .knob {
+    position: absolute;
+    top: 2px; left: 2px;
+    width: 18px; height: 18px;
+    border-radius: 50%;
+    background: var(--gold);
+    transition: transform 0.25s ease;
+  }
+  html[data-theme="light"] .theme-toggle .knob { transform: translateX(16px); }
+
+  .btn {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    font-weight: 500;
+    padding: 9px 18px;
+    border-radius: var(--radius);
+    border: 1px solid var(--line-strong);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    background: transparent;
+    color: var(--text);
+    transition: border-color 0.2s ease, background 0.2s ease, transform 0.15s ease;
+    white-space: nowrap;
+  }
+  .btn:hover { border-color: var(--gold); transform: translateY(-1px); }
+  .btn-solid {
+    background: var(--gold);
+    border-color: var(--gold);
+    color: var(--ink);
+  }
+  .btn-solid:hover { background: var(--gold-bright); border-color: var(--gold-bright); }
+
+  .hamburger {
+    display: none;
+    background: none; border: none; cursor: pointer;
+    flex-direction: column; gap: 5px; padding: 4px;
+  }
+  .hamburger span { width: 22px; height: 2px; background: var(--text); display: block; }
+
+  @media (max-width: 860px) {
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+    .btn-nav-resume { display: none; }
+  }
+
+  .mobile-menu {
+    display: none;
+    position: fixed;
+    top: 68px; left: 0; right: 0;
+    background: var(--surface);
+    border-bottom: 1px solid var(--line);
+    z-index: 99;
+    padding: 24px 20px 32px;
+  }
+  .mobile-menu.open { display: block; }
+  .mobile-menu a {
+    display: block;
+    font-family: var(--font-mono);
+    text-decoration: none;
+    color: var(--text-muted);
+    padding: 12px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .mobile-menu .idx { color: var(--gold); margin-right: 8px; }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    position: relative;
+    padding: 168px 0 110px;
+    overflow: hidden;
+    border-bottom: 1px solid var(--line);
+  }
+  .ticker-strip {
+    position: absolute;
+    top: 128px; left: 0; right: 0;
+    white-space: nowrap;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--text-faint);
+    opacity: 0.7;
+    pointer-events: none;
+    overflow: hidden;
+  }
+  .ticker-track {
+    display: inline-block;
+    animation: ticker 42s linear infinite;
+    padding-right: 60px;
+  }
+  @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  .ticker-track span { margin-right: 48px; }
+  .ticker-track .up { color: var(--teal); }
+  .ticker-track .down { color: var(--gold); }
+
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--teal);
+    letter-spacing: 0.06em;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 28px;
+  }
+  .eyebrow .bar { width: 24px; height: 1px; background: var(--teal); }
+
+  h1.hero-title {
+    font-family: var(--font-display);
+    font-size: clamp(2.4rem, 5.6vw, 4.6rem);
+    line-height: 1.04;
+    font-weight: 600;
+    margin: 0 0 28px;
+    max-width: 880px;
+    letter-spacing: -0.01em;
+  }
+  h1.hero-title .accent { color: var(--gold); }
+
+  .hero-sub {
+    font-size: clamp(1.02rem, 1.6vw, 1.2rem);
+    color: var(--text-muted);
+    max-width: 620px;
+    margin: 0 0 44px;
+  }
+
+  .hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; }
+
+  /* ---------- Sections ---------- */
+  section { padding: 108px 0; border-bottom: 1px solid var(--line); }
+  section:last-of-type { border-bottom: none; }
+
+  .section-head { margin-bottom: 56px; max-width: 640px; }
+  .section-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--gold);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+    display: block;
+  }
+  h2 {
+    font-family: var(--font-display);
+    font-size: clamp(1.7rem, 3vw, 2.3rem);
+    font-weight: 600;
+    margin: 0 0 12px;
+    letter-spacing: -0.01em;
+  }
+  .section-desc { color: var(--text-muted); font-size: 1.02rem; margin: 0; }
+
+  /* ---------- About ---------- */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 64px;
+    align-items: start;
+  }
+  @media (max-width: 860px) {
+    .about-grid { grid-template-columns: 1fr; gap: 40px; }
+  }
+  .about-body p { color: var(--text-muted); font-size: 1.02rem; margin: 0 0 20px; }
+  .about-body strong { color: var(--text); font-weight: 600; }
+
+  .fact-card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 28px;
+  }
+  .fact-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--line);
+    font-size: 14px;
+  }
+  .fact-row:first-child { padding-top: 0; }
+  .fact-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .fact-label { color: var(--text-faint); font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; }
+  .fact-value { color: var(--text); text-align: right; font-weight: 500; }
+
+  /* ---------- Skills ---------- */
+  .skills-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: start;
+  }
+  @media (max-width: 900px) {
+    .skills-layout { grid-template-columns: 1fr; }
+  }
+  .skill-group { margin-bottom: 34px; }
+  .skill-group:last-child { margin-bottom: 0; }
+  .skill-group-title {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--teal);
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .skill-group-title .n { color: var(--text-faint); }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+  .skill-tag {
+    font-size: 13px;
+    padding: 7px 13px;
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius);
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+  }
+  .radar-wrap {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 32px;
+    position: sticky;
+    top: 100px;
+  }
+  .radar-caption {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--text-faint);
+    text-align: center;
+    margin-top: 16px;
+  }
+
+  /* ---------- Projects ---------- */
+  .project-card {
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 40px;
+    margin-bottom: 24px;
+    background: var(--surface);
+    transition: border-color 0.2s ease;
+  }
+  .project-card:hover { border-color: var(--line-strong); }
+  .project-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+  }
+  .project-name {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 0;
+  }
+  .project-tagline { color: var(--text-muted); font-size: 14px; margin-top: 6px; }
+  .status-badge {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 5px 11px;
+    border-radius: 100px;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .project-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 28px;
+    margin-bottom: 24px;
+  }
+  @media (max-width: 700px) {
+    .project-grid { grid-template-columns: 1fr; }
+  }
+  .project-field-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-faint);
+    margin-bottom: 8px;
+  }
+  .project-field-value { color: var(--text-muted); font-size: 14.5px; line-height: 1.65; }
+  .project-stack {
+    display: flex; flex-wrap: wrap; gap: 7px;
+    margin-bottom: 24px;
+  }
+  .stack-chip {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    padding: 5px 10px;
+    background: var(--surface-2);
+    border-radius: 3px;
+    color: var(--teal);
+  }
+  .project-links { display: flex; gap: 12px; flex-wrap: wrap; }
+  .project-link {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    text-decoration: none;
+    color: var(--text);
+    border-bottom: 1px solid var(--gold);
+    padding-bottom: 2px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .project-link:hover { color: var(--gold); }
+  .no-link-note {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--text-faint);
+    font-style: italic;
+  }
+
+  /* ---------- Certifications ---------- */
+  .cert-list { border-top: 1px solid var(--line); }
+  .cert-row {
+    display: grid;
+    grid-template-columns: 100px 1fr 220px;
+    gap: 24px;
+    padding: 24px 0;
+    border-bottom: 1px solid var(--line);
+    align-items: baseline;
+  }
+  @media (max-width: 700px) {
+    .cert-row { grid-template-columns: 1fr; gap: 6px; }
+  }
+  .cert-date { font-family: var(--font-mono); font-size: 13px; color: var(--gold); }
+  .cert-name { font-weight: 600; font-size: 1.02rem; margin-bottom: 4px; }
+  .cert-issuer { font-family: var(--font-mono); font-size: 12.5px; color: var(--text-faint); text-align: right; }
+  @media (max-width: 700px) { .cert-issuer { text-align: left; } }
+  .cert-desc { color: var(--text-muted); font-size: 14px; margin-top: 4px; }
+
+  /* ---------- Contact ---------- */
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+  }
+  @media (max-width: 860px) { .contact-grid { grid-template-columns: 1fr; } }
+  .contact-links { display: flex; flex-direction: column; gap: 0; }
+  .contact-link-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--line);
+    text-decoration: none;
+    color: var(--text);
+  }
+  .contact-link-row:first-child { padding-top: 0; }
+  .contact-link-label { font-family: var(--font-mono); font-size: 12px; color: var(--text-faint); text-transform: uppercase; letter-spacing: 0.05em; }
+  .contact-link-value { font-size: 1.05rem; font-weight: 500; }
+  .contact-link-row:hover .contact-link-value { color: var(--gold); }
+  .arrow { color: var(--gold); font-family: var(--font-mono); transition: transform 0.2s ease; }
+  .contact-link-row:hover .arrow { transform: translateX(4px); }
+
+  form.contact-form { display: flex; flex-direction: column; gap: 18px; }
+  .form-field label {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--text-faint);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 8px;
+  }
+  .form-field input, .form-field textarea {
+    width: 100%;
+    background: var(--surface);
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius);
+    padding: 12px 14px;
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: 14.5px;
+    outline: none;
+    transition: border-color 0.2s ease;
+  }
+  .form-field input:focus, .form-field textarea:focus { border-color: var(--gold); }
+  .form-field textarea { resize: vertical; min-height: 100px; }
+
+  footer {
+    padding: 36px 0;
+    text-align: center;
+    font-family: var(--font-mono);
+    font-size: 12.5px;
+    color: var(--text-faint);
+  }
+
+  /* focus visibility */
+  a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: 2px;
+  }
+
+  .reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a href="#top" class="logo"><span class="dot"></span>OFENTSE.T</a>
+    <ul class="nav-links">
+      <li><a href="#about"><span class="idx">01</span>About</a></li>
+      <li><a href="#skills"><span class="idx">02</span>Skills</a></li>
+      <li><a href="#projects"><span class="idx">03</span>Projects</a></li>
+      <li><a href="#certifications"><span class="idx">04</span>Learning</a></li>
+      <li><a href="#contact"><span class="idx">05</span>Contact</a></li>
+    </ul>
+    <div class="nav-right">
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle light and dark theme"><span class="knob"></span></button>
+      <a href="Ofentse_Thibedi_Resume.pdf" class="btn btn-nav-resume" download>Résumé</a>
+      <button class="hamburger" id="hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#about"><span class="idx">01</span>About</a>
+  <a href="#skills"><span class="idx">02</span>Skills</a>
+  <a href="#projects"><span class="idx">03</span>Projects</a>
+  <a href="#certifications"><span class="idx">04</span>Learning</a>
+  <a href="#contact"><span class="idx">05</span>Contact</a>
+  <a href="Ofentse_Thibedi_Resume.pdf" download><span class="idx">↓</span>Download résumé</a>
+</div>
+
+<main id="top">
+
+  <section class="hero">
+    <div class="ticker-strip" aria-hidden="true">
+      <div class="ticker-track" id="tickerTrack"></div>
+    </div>
+    <div class="wrap">
+      <div class="eyebrow"><span class="bar"></span>JOHANNESBURG, SOUTH AFRICA — OPEN TO REMOTE</div>
+      <h1 class="hero-title">Data &amp; AI systems builder, turning messy operations into <span class="accent">working products</span>.</h1>
+      <p class="hero-sub">I'm Ofentse — Product &amp; Operations Analyst at Sirius Sales, co-founder of Auralith, and the builder behind eight working prototypes spanning fintech inclusion, health tracking, staffing logistics, and trading systems. I don't just analyse problems. I ship the system that fixes them.</p>
+      <div class="hero-ctas">
+        <a href="#projects" class="btn btn-solid">View Projects →</a>
+        <a href="Ofentse_Thibedi_Resume.pdf" class="btn" download>Download Résumé</a>
+        <a href="#contact" class="btn">Get in Touch</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="wrap">
+      <div class="about-grid">
+        <div class="about-body reveal">
+          <span class="section-eyebrow">01 / About</span>
+          <h2>I bridge analytics, engineering, and applied AI — and I actually ship.</h2>
+          <p>By day, I'm a <strong>Product &amp; Operations Analyst at Sirius Sales</strong>, where I've spent years turning supplier and SKU-level performance data into structured reports and process frameworks that get adopted company-wide. That work taught me how operations actually break in practice — not in theory.</p>
+          <p>Outside of that, I'm co-founding <strong>Auralith</strong>, a SaaS company built to bring real operational digitisation to SMEs across Africa, structured around five specialist divisions and a long-term platform vision called FieldOS. It's the throughline for most of what I build.</p>
+          <p>I'm currently deepening my fundamentals through ALX/ExploreAI's <strong>Data Engineering Certificate</strong>, and I've completed Anthropic Academy programs in AI Fluency, the Claude API, Model Context Protocol, and Claude Code — because building AI systems properly means understanding what's happening under the hood, not just calling an endpoint.</p>
+          <p>What ties all of it together: I don't stop at the analysis or the pitch deck. Eight working prototypes — covering financial inclusion, chronic illness management, staffing logistics, trading analytics, women's mentorship, offline-first CRM, and vocational assessment — started as problems I noticed and ended as systems I built.</p>
+        </div>
+        <div class="fact-card reveal">
+          <div class="fact-row"><span class="fact-label">Role</span><span class="fact-value">Product &amp; Ops Analyst, Sirius Sales</span></div>
+          <div class="fact-row"><span class="fact-label">Building</span><span class="fact-value">Auralith (co-founder)</span></div>
+          <div class="fact-row"><span class="fact-label">Studying</span><span class="fact-value">Data Engineering Cert, ALX/ExploreAI</span></div>
+          <div class="fact-row"><span class="fact-label">Certified</span><span class="fact-value">4× Anthropic Academy</span></div>
+          <div class="fact-row"><span class="fact-label">Based in</span><span class="fact-value">Johannesburg, ZA</span></div>
+          <div class="fact-row"><span class="fact-label">Available</span><span class="fact-value">Remote, worldwide</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="section-eyebrow">02 / Skills</span>
+        <h2>What I actually work with</h2>
+        <p class="section-desc">Grouped by how I use it, not as a flat tag cloud. The radar reflects working proficiency, self-assessed against real project use — not a certification score.</p>
+      </div>
+      <div class="skills-layout">
+        <div class="reveal">
+          <div class="skill-group">
+            <div class="skill-group-title"><span class="n">/01</span> Data Analytics &amp; BI</div>
+            <div class="skill-tags">
+              <span class="skill-tag">SQL (CTEs, Joins, Views, Window Fns)</span>
+              <span class="skill-tag">Power BI</span>
+              <span class="skill-tag">DAX</span>
+              <span class="skill-tag">Statistical Analysis</span>
+              <span class="skill-tag">Data Validation Pipelines</span>
+            </div>
+          </div>
+          <div class="skill-group">
+            <div class="skill-group-title"><span class="n">/02</span> Data Engineering</div>
+            <div class="skill-tags">
+              <span class="skill-tag">Python (Pandas, NumPy)</span>
+              <span class="skill-tag">ETL / Data Pipelines</span>
+              <span class="skill-tag">DynamoDB</span>
+              <span class="skill-tag">PostgreSQL Schema Design</span>
+            </div>
+          </div>
+          <div class="skill-group">
+            <div class="skill-group-title"><span class="n">/03</span> AI / LLM Systems</div>
+            <div class="skill-tags">
+              <span class="skill-tag">Claude API &amp; Tool Use</span>
+              <span class="skill-tag">Model Context Protocol</span>
+              <span class="skill-tag">Agent Memory Architecture</span>
+              <span class="skill-tag">Prompt Engineering</span>
+              <span class="skill-tag">Gemini AI</span>
+            </div>
+          </div>
+          <div class="skill-group">
+            <div class="skill-group-title"><span class="n">/04</span> Product &amp; Full-Stack</div>
+            <div class="skill-tags">
+              <span class="skill-tag">React (PWA)</span>
+              <span class="skill-tag">Supabase</span>
+              <span class="skill-tag">Google Cloud</span>
+              <span class="skill-tag">Figma</span>
+              <span class="skill-tag">Project Management</span>
+            </div>
+          </div>
+        </div>
+        <div class="radar-wrap reveal" id="radarWrap">
+          <svg id="radarChart" viewBox="0 0 320 320" width="100%" style="max-width:320px;display:block;margin:0 auto;"></svg>
+          <div class="radar-caption">Working proficiency across core disciplines</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="section-eyebrow">03 / Featured Projects</span>
+        <h2>Eight problems. Eight working prototypes.</h2>
+        <p class="section-desc">None of these are live yet — they're all functioning prototypes, built to prove the model works before scaling. Each one started as a real problem, not a portfolio exercise.</p>
+      </div>
+
+      <!-- Auralith -->
+      <div class="project-card reveal">
+        <div class="project-top">
+          <div><h3 class="project-name">Auralith</h3><div class="project-tagline">Parent SaaS company — SME operational digitisation for Africa</div></div>
+          <span class="status-badge">In Development</span>
+        </div>
+        <div class="project-grid">
+          <div><div class="project-field-label">Problem</div><div class="project-field-value">African SMEs run high-value operations on WhatsApp groups, spreadsheets, and memory — with no affordable path to real operational infrastructure.</div></div>
+          <div><div class="project-field-label">What I Built</div><div class="project-field-value">Co-founded and architected a parent company with five specialist divisions (AI, Systems, Analytics, Studio, Ops) plus an associates model with revenue-sharing and quality gates — productising operational digitisation as services first, with FieldOS as the long-term platform bet.</div></div>
+        </div>
+        <div class="project-stack">
+          <span class="stack-chip">Product Strategy</span><span class="stack-chip">SaaS Architecture</span><span class="stack-chip">AI Integration</span><span class="stack-chip">Stakeholder Design</span>
+        </div>
+        <div class="project-links"><span class="no-link-note">In active development — no public link yet</span></div>
+      </div>
+
+      <!-- PromoteForce -->
+      <div class="project-card reveal">
+        <div class="project-top">
+          <div><h3 class="project-name">PromoteForce</h3><div class="project-tagline">AI-powered staffing marketplace</div></div>
+          <span class="status-badge">Prototype</span>
+        </div>
+        <div class="project-grid">
+          <div><div class="project-field-label">Problem</div><div class="project-field-value">Staffing and promotions agencies coordinate shifts and multi-region workforces manually across spreadsheets, causing allocation errors and compliance gaps.</div></div>
+          <div><div class="project-field-label">What I Built</div><div class="project-field-value">A staffing marketplace with role-based access control, a 20-table PostgreSQL schema, and full shift lifecycle management, with real-time state coordination across regions.</div></div>
+        </div>
+        <div class="project-stack">
+          <span class="stack-chip">Supabase (PostgreSQL)</span><span class="stack-chip">Upstash Redis</span><span class="stack-chip">Resend</span><span class="stack-chip">React</span><span class="stack-chip">Google AI Studio</span>
+        </div>
+        <div class="project-links"><a class="project-link" href="https://github.com/yaowa213/PromoteForce-" target="_blank" rel="noopener">GitHub Repo →</a></div>
+      </div>
+
+      <!-- Sirius Field -->
+      <div class="project-card reveal">
+        <div class="project-top">
+          <div><h3 class="project-name">Sirius Field</h3><div class="project-tagline">Offline-first field sales CRM</div></div>
+          <span class="status-badge">Prototype</span>
+        </div>
+        <div class="project-grid">
+          <div><div class="project-field-label">Problem</div><div class="project-field-value">Field sales teams need to execute store visits, track tasks, and manage orders — but field connectivity is inconsistent, and most CRMs assume a constant connection.</div></div>
+          <div><div class="project-field-label">What I Built</div><div class="project-field-value">Defined and designed an offline-first field CRM covering store execution, task tracking, and order management, grounded in my own real field-operations experience at Sirius Sales.</div></div>
+        </div>
+        <div class="project-stack">
+          <span class="stack-chip">Product Design</span><span class="stack-chip">CRM Architecture</span><span class="stack-chip">Offline-First UX</span><span class="stack-chip">Workflow Mapping</span>
+        </div>
+        <div class="project-links"><a class="project-link" href="https://github.com/yaowa213/Sirius-Field-" target="_blank" rel="noopener">GitHub Repo →</a></div>
+      </div>
+
+      <!-- QuantTrader Assistant -->
+      <div class="project-card reveal">
+        <div class="project-top">
+          <div><h3 class="project-name">QuantTrader Assistant</h3><div class="project-tagline">Rule-based SMC trading decision support</div></div>
+          <span class="status-badge">Prototype</span>
+        </div>
+        <div class="project-grid">
+          <div><div class="project-field-label">Problem</div><div class="project-field-value">Discretionary Smart Money Concepts trading is prone to inconsistent execution — the same setup gets judged differently depending on mood, fatigue, or recency bias.</div></div>
+          <div><div class="project-field-label">What I Built</div><div class="project-field-value">A rule-based trading decision-support system implementing SMC, with structured trade journaling, compliance monitoring, risk-management rules, and an analytics dashboard for performance tracking.</div></div>
+        </div>
+        <div class="project-stack">
+          <span class="stack-chip">Python</span><span class="stack-chip">Rule-Based Logic</span><span class="stack-chip">Data Analytics</span><span class="stack-chip">Dashboard Design</span>
+        </div>
+        <div class="project-links"><a class="project-link" href="https://github.com/yaowa213/QuantTrader-Assistant" target="_blank" rel="noopener">GitHub Repo →</a></div>
+      </div>
+
+      <!-- Femfoundry -->
+      <div class="project-card reveal">
+        <div class="project-top">
+          <div><h3 class="project-name">Femfoundry</h3><div class="project-tagline">Structured mentorship platform for women in competitive fields</div></div>
+          <span class="status-badge">Wireframe</span>
+        </div>
+        <div class="project-grid">
+          <div><div class="project-field-label">Problem</div><div class="project-field-value">Women trying to break into competitive fields often lack access to mentors who've actually done it — generic networking platforms don't solve for structured, outcome-focused mentorship.</div></div>
+          <div><div class="project-field-label">What I Built</div><div class="project-field-value">As product manager, project manager, and UX designer, led the design of a LinkedIn-style platform connecting accomplished women with women pursuing specific fields — from wireframes through project planning.</div></div>
+        </div>
+        <div class="project-stack">
+          <span class="stack-chip">Product Management</span><span class="stack-chip">UX Design (Figma)</span><span class="stack-chip">Project Management</span>
+        </div>
+        <div class="project-links">
+          <a class="project-link" href="https://www.figma.com/make/rfMpavHJbqNSh5dLBpkkBz/FemFoundry-Wireframe-Design?t=qceNVjPxSvpXgvl1-1" target="_blank" rel="noopener">Figma Wireframes →</a>
+          <a class="project-link" href="https://trello.com/invite/b/68f933ca6fb5478eee2f607d/ATTI6792dce2bc3480132d1c2cc1307c90564CFE58A4/femfoundry" target="_blank" rel="noopener">Trello Board →</a>
+        </div>
+      </div>
+
+      <!-- Imali Trust -->
+      <div class="project-card reveal">
+        <div class="project-top">
+          <div><h3 class="project-name">Imali Trust</h3><div class="project-tagline">Financial inclusion for underbanked South Africans</div></div>
+          <span class="status-badge">Prototype</span>
+        </div>
+        <div class="project-grid">
+          <div><div class="project-field-label">Problem</div><div class="project-field-value">Underbanked South Africans often turn to informal, high-interest lenders because formal financial infrastructure doesn't serve them — trapping people in cycles of debt.</div></div>
+          <div><div class="project-field-label">What I Built</div><div class="project-field-value">A financial inclusion platform where people can save money and borrow against it at interest, structured as a viable alternative to informal lending.</div></div>
+        </div>
+        <div class="project-stack">
+          <span class="stack-chip">React</span><span class="stack-chip">Google AI Studio</span><span class="stack-chip">Gemini API</span>
+        </div>
+        <div class="project-links"><a class="project-link" href="https://github.com/yaowa213/Imali-Trust" target="_blank" rel="noopener">GitHub Repo →</a></div>
+      </div>
+
+      <!-- T2D Companion -->
+      <div class="project-card reveal">
+        <div class="project-top">
+          <div><h3 class="project-name">T2D Companion</h3><div class="project-tagline">Type 2 diabetes tracking &amp; care companion</div></div>
+          <span class="status-badge">Prototype</span>
+        </div>
+        <div class="project-grid">
+          <div><div class="project-field-label">Problem</div><div class="project-field-value">Type 2 diabetes is widely underdiagnosed and poorly managed, partly because patients lack simple tools to track patterns between medication, insulin, blood sugar, and mood between doctor's visits.</div></div>
+          <div><div class="project-field-label">What I Built</div><div class="project-field-value">A companion app with medication and doctor's-appointment reminders, plus logging for insulin intake, sugar levels, and mood — with spreadsheet export so patients can bring structured data to their next appointment.</div></div>
+        </div>
+        <div class="project-stack">
+          <span class="stack-chip">React</span><span class="stack-chip">Google AI Studio</span><span class="stack-chip">Gemini API</span>
+        </div>
+        <div class="project-links"><a class="project-link" href="https://github.com/yaowa213/T2D-Companion-" target="_blank" rel="noopener">GitHub Repo →</a></div>
+      </div>
+
+      <!-- Vocational Assessment Platform -->
+      <div class="project-card reveal">
+        <div class="project-top">
+          <div><h3 class="project-name">Vocational Assessment Platform</h3><div class="project-tagline">Skills onboarding for literacy-impaired learners</div></div>
+          <span class="status-badge">Prototype — Phase 4/7</span>
+        </div>
+        <div class="project-grid">
+          <div><div class="project-field-label">Problem</div><div class="project-field-value">Learners with literacy challenges (ages 10–18) in special and skills schools need a way to discover which trades suit them — but most assessment tools assume fluent reading and writing.</div></div>
+          <div><div class="project-field-label">What I Built</div><div class="project-field-value">An AI-powered onboarding and assessment system across seven trade modules, using voice input and Gemini AI scoring so learners can demonstrate ability without needing to read or write, delivered as an offline-capable PWA.</div></div>
+        </div>
+        <div class="project-stack">
+          <span class="stack-chip">React (PWA)</span><span class="stack-chip">Gemini API</span><span class="stack-chip">Supabase</span><span class="stack-chip">Web Speech API</span>
+        </div>
+        <div class="project-links"><a class="project-link" href="https://github.com/yaowa213/Vocational-Assessment-Platform-" target="_blank" rel="noopener">GitHub Repo →</a></div>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="certifications">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="section-eyebrow">04 / Certifications &amp; Learning</span>
+        <h2>Still building the fundamentals, on purpose</h2>
+        <p class="section-desc">In chronological order, most recent first.</p>
+      </div>
+      <div class="cert-list reveal">
+        <div class="cert-row">
+          <div class="cert-date">Jul 2026</div>
+          <div><div class="cert-name">Introduction to Model Context Protocol (MCP)</div><div class="cert-desc">MCP fundamentals — connecting AI models to external tools, APIs, and data sources.</div></div>
+          <div class="cert-issuer">Anthropic Academy</div>
+        </div>
+        <div class="cert-row">
+          <div class="cert-date">Jul 2026</div>
+          <div><div class="cert-name">Claude Code 101</div><div class="cert-desc">Foundations of Claude Code — agentic coding workflows and CLI-based AI development.</div></div>
+          <div class="cert-issuer">Anthropic Academy</div>
+        </div>
+        <div class="cert-row">
+          <div class="cert-date">2025</div>
+          <div><div class="cert-name">Claude Code in Action</div><div class="cert-desc">Hands-on Claude Code development — building real systems in production-style environments.</div></div>
+          <div class="cert-issuer">Anthropic Academy</div>
+        </div>
+        <div class="cert-row">
+          <div class="cert-date">2025</div>
+          <div><div class="cert-name">Claude with the Anthropic API</div><div class="cert-desc">Practical API integration — prompt engineering, structured calls, and AI-powered app design.</div></div>
+          <div class="cert-issuer">Anthropic Academy</div>
+        </div>
+        <div class="cert-row">
+          <div class="cert-date">2025</div>
+          <div><div class="cert-name">AI Fluency: Framework &amp; Foundations</div><div class="cert-desc">AI concepts and foundational principles. Internationally accredited.</div></div>
+          <div class="cert-issuer">Anthropic — accredited by UCC, Ringling College, HEA &amp; National Forum</div>
+        </div>
+        <div class="cert-row">
+          <div class="cert-date">Sep 2025 —</div>
+          <div><div class="cert-name">Data Engineering Certificate</div><div class="cert-desc">SQL, Python, Power BI, data modelling — with integrated project work on multi-table databases and BI dashboards. In progress.</div></div>
+          <div class="cert-issuer">ALX / ExploreAI Academy</div>
+        </div>
+        <div class="cert-row">
+          <div class="cert-date">Jun–Sep 2025</div>
+          <div><div class="cert-name">AI Career Essentials</div><div class="cert-desc">AI fundamentals, practical applications, and entrepreneurial empowerment.</div></div>
+          <div class="cert-issuer">ALX</div>
+        </div>
+        <div class="cert-row">
+          <div class="cert-date">2024</div>
+          <div><div class="cert-name">AI &amp; ML Scholars Program</div><div class="cert-desc">Machine learning fundamentals, cloud AI services, and applied ML concepts.</div></div>
+          <div class="cert-issuer">Amazon Web Services</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="section-eyebrow">05 / Contact</span>
+        <h2>Building something? Let's talk.</h2>
+        <p class="section-desc">Open to remote roles in data analytics, data engineering, and applied AI systems — and open to conversations about Auralith.</p>
+      </div>
+      <div class="contact-grid">
+        <div class="contact-links reveal">
+          <a class="contact-link-row" href="mailto:thibediofentse53@gmail.com">
+            <div><div class="contact-link-label">Email</div><div class="contact-link-value">thibediofentse53@gmail.com</div></div>
+            <span class="arrow">→</span>
+          </a>
+          <a class="contact-link-row" href="https://linkedin.com/in/ofentse-thibedi-641832121" target="_blank" rel="noopener">
+            <div><div class="contact-link-label">LinkedIn</div><div class="contact-link-value">/in/ofentse-thibedi</div></div>
+            <span class="arrow">→</span>
+          </a>
+          <a class="contact-link-row" href="https://github.com/yaowa213" target="_blank" rel="noopener">
+            <div><div class="contact-link-label">GitHub</div><div class="contact-link-value">@yaowa213</div></div>
+            <span class="arrow">→</span>
+          </a>
+          <a class="contact-link-row" href="Ofentse_Thibedi_Resume.pdf" download>
+            <div><div class="contact-link-label">Résumé</div><div class="contact-link-value">Download PDF</div></div>
+            <span class="arrow">↓</span>
+          </a>
+        </div>
+        <form class="contact-form reveal" id="contactForm">
+          <div class="form-field">
+            <label for="cf-name">Name</label>
+            <input id="cf-name" name="name" type="text" required>
+          </div>
+          <div class="form-field">
+            <label for="cf-email">Email</label>
+            <input id="cf-email" name="email" type="email" required>
+          </div>
+          <div class="form-field">
+            <label for="cf-message">Message</label>
+            <textarea id="cf-message" name="message" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-solid" style="align-self:flex-start;">Send Message</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">© 2026 Ofentse Thibedi. Built with intent, in Johannesburg.</div>
+</footer>
+
+<script>
+  // Theme toggle
+  const themeToggle = document.getElementById('themeToggle');
+  const html = document.documentElement;
+  const savedTheme = null; // no localStorage per environment constraints; default dark each load
+  themeToggle.addEventListener('click', () => {
+    const current = html.getAttribute('data-theme');
+    html.setAttribute('data-theme', current === 'dark' ? 'light' : 'dark');
+  });
+
+  // Mobile menu
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  hamburger.addEventListener('click', () => mobileMenu.classList.toggle('open'));
+  mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileMenu.classList.remove('open')));
+
+  // Ticker content
+  const tickerItems = [
+    'SELECT sku, SUM(units) FROM sales_perf',
+    '20-TABLE POSTGRES SCHEMA',
+    'XAUUSD · SMC · LONDON SESSION',
+    'PWA · OFFLINE-FIRST · SYNC',
+    'GEMINI API · TOOL USE',
+    'DAX MEASURE: BUDGET_VS_ACTUAL',
+    '7 TRADE MODULES · VOICE INPUT',
+    'CLAUDE API · MCP · AGENT MEMORY',
+    'R/KM RATE · LOGBOOK AUDIT',
+    'RBAC · SHIFT LIFECYCLE',
+  ];
+  const track = document.getElementById('tickerTrack');
+  const buildTicker = () => {
+    let html = '';
+    for (let i = 0; i < 2; i++) {
+      tickerItems.forEach((t, idx) => {
+        const cls = idx % 2 === 0 ? 'up' : 'down';
+        html += `<span class="${cls}">${t}</span>`;
+      });
+    }
+    track.innerHTML = html;
+  };
+  buildTicker();
+
+  // Reveal on scroll
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  revealEls.forEach(el => io.observe(el));
+
+  // Radar chart
+  const radarData = [
+    { label: 'Data Analytics', value: 0.9 },
+    { label: 'Data Engineering', value: 0.75 },
+    { label: 'AI / LLM Systems', value: 0.88 },
+    { label: 'Product & UX', value: 0.8 },
+    { label: 'Full-Stack Dev', value: 0.68 },
+    { label: 'Automation', value: 0.78 },
+  ];
+  const svg = document.getElementById('radarChart');
+  const cx = 160, cy = 150, maxR = 108;
+  const n = radarData.length;
+  const angleFor = i => (Math.PI * 2 * i) / n - Math.PI / 2;
+  const pointFor = (i, r) => {
+    const a = angleFor(i);
+    return [cx + r * Math.cos(a), cy + r * Math.sin(a)];
+  };
+  let svgContent = '';
+  // rings
+  [0.25, 0.5, 0.75, 1].forEach(f => {
+    const pts = radarData.map((_, i) => pointFor(i, maxR * f).join(',')).join(' ');
+    svgContent += `<polygon points="${pts}" fill="none" stroke="var(--line-strong)" stroke-width="1"/>`;
+  });
+  // axes + labels
+  radarData.forEach((d, i) => {
+    const [x, y] = pointFor(i, maxR);
+    svgContent += `<line x1="${cx}" y1="${cy}" x2="${x}" y2="${y}" stroke="var(--line-strong)" stroke-width="1"/>`;
+    const [lx, ly] = pointFor(i, maxR + 26);
+    svgContent += `<text x="${lx}" y="${ly}" fill="var(--text-faint)" font-size="9.5" font-family="IBM Plex Mono, monospace" text-anchor="middle" dominant-baseline="middle">${d.label.toUpperCase()}</text>`;
+  });
+  // data polygon (animated)
+  const dataPts = radarData.map((d, i) => pointFor(i, maxR * d.value).join(',')).join(' ');
+  svgContent += `<polygon id="radarPoly" points="${dataPts}" fill="var(--gold)" fill-opacity="0.16" stroke="var(--gold)" stroke-width="2" style="opacity:0; transform-origin: ${cx}px ${cy}px; transform: scale(0.6); transition: opacity 0.8s ease, transform 0.8s ease;"/>`;
+  radarData.forEach((d, i) => {
+    const [x, y] = pointFor(i, maxR * d.value);
+    svgContent += `<circle cx="${x}" cy="${y}" r="3.5" fill="var(--gold)"/>`;
+  });
+  svg.innerHTML = svgContent;
+
+  const radarWrap = document.getElementById('radarWrap');
+  const radarIo = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const poly = document.getElementById('radarPoly');
+        poly.style.opacity = '1';
+        poly.style.transform = 'scale(1)';
+        radarIo.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.3 });
+  radarIo.observe(radarWrap);
+
+  // Contact form (no backend — mailto fallback)
+  document.getElementById('contactForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const name = document.getElementById('cf-name').value;
+    const email = document.getElementById('cf-email').value;
+    const message = document.getElementById('cf-message').value;
+    const subject = encodeURIComponent(`Portfolio contact from ${name}`);
+    const body = encodeURIComponent(`${message}\n\n— ${name} (${email})`);
+    window.location.href = `mailto:thibediofentse53@gmail.com?subject=${subject}&body=${body}`;
+  });
+</script>
+
+</body>
+</html>
